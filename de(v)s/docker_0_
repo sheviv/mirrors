@@ -1,0 +1,103 @@
+Docker
+Есть image(Dockerfile) на основе которых создаются контейнеры(их может быть много, они полность изолированы)
+
+Добавить права sudo
+sudo groupadd docker
+sudo usermode -aG docker $USER
+
+Создать свой образ
+-t указывает на имя, . указывает на теекующую директорию 
+docker build -t hello-world .
+
+Создать Dockerfile(для создания своего image)
+Базовый образ с которого начинается сборка(image python версией 3.6)
+FROM python:3.6
+Выполнить определенную команду(создание директории)
+RUN mkdir -p /usr/src/app/
+Переход в каталог, в котором научнут выполняться команды 
+WORKDIR /usr/src/app/
+Копирование с одного места в другое(. с какой папки(данной директории) в папку /usr/src/app/)
+COPY . /usr/src/app/
+Что будет делать docker после запуска контейнера(после заgecка через docker start - выполнить команду python app.py) - запускается через shell, entrypoint выполняется без shell
+CMD ["python", "app.py"]
+
+Спулить(pull) готового образа(image) - name
+docker pull name
+
+Запуск/создание нового контейнера
+docker run hello-world
+Запуск/создание контейнера с именем hello на базе hello-world
+docker run --name hello hello-world
+
+Проверить запущенные контейнеры
+docker ps
+Проверить все контейнеры, даже остановленные
+docker ps -a
+Проверить все контейнеры, даже остановленные и вывести их id
+docker ps -a -q
+
+Удалить контейнер
+docker rm id_container или name_container
+Удалить все контейнеры по их id
+docker rm $(docker ps -qa)
+
+Запустить контейнер фоном(-d работал не в консоли)
+docker run --name hello -d hello-world
+Остановить контейнер принудительно
+docker stop id_container или name_container
+
+Удаление контейнера после завершения его работы/ принудительного завершения
+docker run --name hello -d --rm hello-world
+
+
+Создать файл с версиями приложений(requirements.txt)
+tensorflow==1.17.6
+numpy==1.19.5
+В Dockerfile:
+FROM python:3.6
+RUN mkdir -p /usr/src/app/
+WORKDIR /usr/src/app/
+COPY . /usr/src/app/
+Рекурсивное выполнение установки всех приложений из файла
+RUN pip install --no-cache-dir -r requirements.txt
+Пробрасываем порт из контейнера для чтения
+EXPOSE 8080
+CMD ["python", "app.py"]
+
+Запустить контейнер(web) с портом(-p) на основе image(web-hello)
+docker run --rm --name web -p 8080:8080 web-hello
+
+
+Переменные окружения
+Смена даты и времени. В Dockerfile добавить строку
+ENV TZ Europe/Moscow
+или добавить(-e) в командную строку при запуске контейнера
+docker run --rm --name web -p 8080:8080 -e TZ=Europe/Moscow web-hello
+
+
+Добавить работу с данными(-v и добавить путь к файлу с данными(/home/user/db) и абсолютный путь контейнера(/usr/src/app/) - указан в Dockerfile-COPY) и сохранение изменений после завершения работы контейнера
+docker run --rm --name web -p 8080:8080 -e TZ=Europe/Moscow -v /home/user/db:/usr/src/app/ web-hello
+или
+Создать Docker volume(надстройка над папками) - web
+docker volume create web
+Запуск контейнера с volume(web)  
+docker run --rm --name web -p 8080:8080 -v web:/home/user/db web-hello
+
+
+Удалить image(удалются со всеми зависимостями)
+docker rmi name_image
+Удалить все images по их индексам
+docker rmi $(docker images -q)
+
+
+Выполнить команду(bash) в контейнере(name_container)
+docker exec -it name_container bash
+
+Подключиться к операциям в контейнере(name_container)
+docker attach name_container
+
+Выйти из работы контейнера, не выключая его
+Ctrl+P ... Ctrl+Q
+
+
+
