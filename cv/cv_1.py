@@ -383,11 +383,11 @@ import numpy as np
 
 
 # Load the Haar cascade file
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+# face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 # Check if the cascade file has been loaded correctly
-if face_cascade.empty():
-	raise IOError('Unable to load the face cascade classifier xml file')
+# if face_cascade.empty():
+# 	raise IOError('Unable to load the face cascade classifier xml file')
 
 # Initialize the video capture object
 cap = cv2.VideoCapture(0)
@@ -409,11 +409,11 @@ while True:
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # Run the face detector on the grayscale image
-    face_rects = face_cascade.detectMultiScale(gray, 1.3, 5)
+    # face_rects = face_cascade.detectMultiScale(gray, 1.3, 5)
 
     # Draw a rectangle around the face
-    for (x,y,w,h) in face_rects:
-        cv2.rectangle(frame, (x,y), (x+w,y+h), (0,255,0), 3)
+    # for (x,y,w,h) in face_rects:
+    #     cv2.rectangle(frame, (x,y), (x+w,y+h), (0,255,0), 3)
 
     # Display the output
     cv2.imshow('Face Detector', frame)

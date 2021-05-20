@@ -1,0 +1,13 @@
+git clone https://github.com/ultralytics/yolov5.git
+pip install -r requirements.txt
+sh weights/download_weights.sh
+
+python detect.py --source input/image_1.jpg --weights yolov5s.pt --project infer_yolov5s
+--source - путь к входному файлу
+--weights - путь к файлу веса yolov5
+--project - если использовать этот флаг, указать имя после него - создается папка с таким именем
+
+python detect.py --source input/image_1.jpg --weights yolov5x.pt --project infer_yolov5x
+
+python detect.py --source input/video_1.mp4 --weights yolov5s.pt --project infer_yolov5s
+

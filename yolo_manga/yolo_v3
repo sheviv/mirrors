@@ -1,0 +1,18 @@
+git clone https://github.com/ultralytics/yolov3.git
+sh weights/download_weights.sh
+pip install -r requirements.txt
+
+python detect.py --source input/image_1.jpg --weights yolov3.pt --project infer_yolov3
+--source указывает путь к изображению
+--weights - это путь к файлу весов
+--project создаст папку с указанным именем
+
+python detect.py --source input/image_1.jpg --weights yolov3-tiny.pt --project infer_yolov3_tiny
+
+python detect.py --source input/image_2.jpg --weights yolov3.pt --project infer_yolov3
+
+
+python detect.py --source input/video_1.mp4 --weights yolov3.pt --project infer_yolov3 --view-img
+
+python detect.py --source input/video_1.mp4 --weights yolov3-tiny.pt --project infer_yolov3_tiny --view-img
+
