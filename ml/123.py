@@ -1,3 +1,5 @@
+import copy
+import math
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -5,19 +7,22 @@ from typing import List
 from collections import Counter
 from collections import Counter as mset
 from itertools import groupby
+import operator
+
 
 class Solution:
-    def arrayStringsAreEqual(self, word1: List[str], word2: List[str]) -> bool:
-        s_1 = "".join(word1)
-        s_2 = "".join(word2)
-        if s_1 == s_2:
+    def largeGroupPositions(self, s: str) -> List[List[int]]:
+        x = 121
+        print(f"1: {list(str(x))}")
+        print(f"2: {list(str(x))[::-1]}")
+        if "".join(list(str(x))) == "".join(list(str(x))[::-1]):
             return True
         else:
             return False
+        # return True
 
-word1 = ["abc", "d", "defg"]
-word2 = ["abcddefg"]
+
+st = "abbxxxxzzy"  # [427,286]
 s = Solution()
-cv = s.arrayStringsAreEqual(word1=word1, word2=word2)
+cv = s.largeGroupPositions(s=st)
 print(cv)
-
