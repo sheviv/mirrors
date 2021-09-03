@@ -1,0 +1,40 @@
+1. Создать ветку
+- git status
+- git checkout - b name
+- git status
+2. Добавить изменения
+- git add --all / - git add name.py
+- git status
+3. Добавить commit
+- git commit -a -m "_"
+- git status
+4. Посмотреть изменения
+- git log
+5. Push изменений
+- git push origin name
+6. Удалить все изменения
+- git reset --soft HEAD^
+- git reset --hard
+8. Обновить ветку на ветку
+- clone master
+- cd master
+ - git checkout
+9. Сохранить изменения в "хранилище"
+- git stash #сохранить(ctrl-c)
+- git stash apply #вставить(ctrl-v)
+10. Откатить до первого комита, не меняя файл
+- git reset --soft _ #HEAD^
+- git reset _ . #HEAD
+11. Мерж мастер в ветку
+- git checkout master
+- git pull origin master
+- git checkout name
+- git status
+- git add .
+- git merge master
+- git status
+- git add .
+12. Удалить ветку на сервере
+- git push origin --delete name
+13. Удалить ветку локально
+- git branch -d name

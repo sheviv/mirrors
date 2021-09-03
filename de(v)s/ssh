@@ -1,0 +1,23 @@
+# первое подключение к серверу
+sudo apt install openssh-server
+yes
+ssh root@000.000.0.000 -p 22  # 000.000.0.000 ip сервера
+
+# подключение с использованием ключей SSH
+# создание пары RSA ключей
+ssh-keygen -t rsa
+# куда сохранить ключи:
+Enter file in which to save the key (/home/demo/.ssh/id_rsa):
+# использовать ключевую фразу
+Enter passphrase (empty for no passphrase):
+# публичный ключ хранится в /home/demo/.ssh/id_rsa.pub, закрытый ключ хранится в /home/demo/.ssh/id_rsa
+# скопировать публичный ключ на новый компьютер
+ssh-copy-id user@12.34.56.78
+
+# отключить доступ по паролю для пользователя root
+# (открыть файл конфигурации SSH сервера)
+sudo nano /etc/ssh/sshd_config
+PermitRootLogin without-password
+# перезапустить службу SSH
+reload ssh
+

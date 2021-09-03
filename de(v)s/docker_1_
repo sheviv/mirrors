@@ -1,0 +1,108 @@
+Перезапуск контейнера после завершения работы(no - не перезапускать при выходе контейнера, always -всегда перезапускать при выходе, unless-stopped - всегда перезагружать, но помнить о явной остановке, 
+on-failure[:max-retry] - перезапускать только в случае сбоя)
+docker run -d --restart=always ubuntu echo done
+Ограничение на количество попыток(--restart=on-failure:10) перезапуска, выходя, если оно превышено
+docker run -d --restart=on-failure:10 ubuntu /bin/false
+
+Флаги: -t создает TTY-устройство(терминал), -i указывает, что этот сеанс Docker является интерактивным(-ti или -it)
+docker run -t -i node /bin/bash
+
+Превратить созданный раннее контейнер в образ
+docker commit name_container
+
+Переименовать коммит(commit) на Imagename
+docker tag 071f6a36c23a1980 Imagename
+"""
+Образ - слой только для чтения
+Имя - имя образа, например «todoapp»
+Тег - относится к присвоению имени образу(модификатор имени образа)
+Репозиторий - размещенная коллекция тегированных образов(создают файловую систему контейнера)
+"""
+
+
+Копирование общедоступного образа и помещение его в учетную запись Docker Hub
+Извлекает образ Debian из Docker Hub
+docker pull debian:wheezy
+Помечает образ wheezy своим именем пользователя(adev) и тегом (mywheezy1)
+docker tag debian:wheezy adev/debian:mywheezy1
+Заливает созданный тег
+docker push adev/debian:mywheezy1
+
+Копирование общедоступного образа и помещение его в частный реестр adev
+Извлекает образ Debian из Docker Hub
+docker pull debian
+Помечает wheezy вашим реестром(mycorp.private.dockerregistry), именем пользователя(adev) и тегом(mywheezy1)
+docker tag debian:wheezy mycorp.private.dockerregistry/adev/debian:mywheezy1
+Залить созданный тег в закрытый реестр(адрес сервера закрытого реестра требуется при тегировании и при заливке)
+docker push mycorp.private.dockerregistry/adev/debian:mywheezy1
+
+
+Dockerfile для замены часового пояса по умолчанию сentos: 7
+Начинается с образа Centos
+FROM centos:7
+Удаляет существующий файл localtime
+RUN rm -rf /etc/localtime
+Заменяет ссылку /etc/localtime ссылкой на нужный часовой пояс
+RUN ln -s /usr/share/zoneinfo/GMT /etc/localtime
+Показывает часовой пояс контейнера как команду по умолчанию для запуска(не нужна)
+CMD date +%Z
+
+
+Установка кодировки в файле Dockerfile
+FROM ubuntu:16.04
+Обновляет индекс пакета и устанавливает пакет locales
+RUN apt-get update && apt-get install -y locales
+Создает локаль для английского языка США в кодировке UTF-8
+RUN locale-gen en_US.UTF-8
+Устанавливает переменную среды LANG(LANG – настройка по умолчанию для настроек предпочтительного языка и кодировки)
+ENV LANG en_US.UTF-8
+Устанавливает переменную среды LANGUAGE(LANGUAGE используется для предоставления упорядоченного списка языков, предпочитаемых приложениями, если основной язык недоступен)
+ENV LANGUAGE en_US:en
+env - отобразит настройку среды для контейнера
+CMD env
+
+Обращаться к каждому шагу сборки
+Dockerfile образа с несколькими слоями:
+FROM debian
+RUN touch /file1
+RUN touch /file2
+RUN touch /file3
+Выводит содержимое первого файла
+CMD ["cat","/file1"]
+Сборка образа myimage
+docker build -t myimage -q .
+Присваивание тега каждому слою образа в числовом порядке
+#!/bin/bash
+переменная счетчика
+x=1
+Запускает цикл for
+for id in $(docker history -q "myimage:latest" |
+Не учитывает удаленно собранные слои, которые помечены как отсутствующие
+➥ grep -vw missing
+Утилита tac для изменения порядка идентификаторов образов, которые выводит команда docker history
+➥ | tac)
+do
+На каждой итерации цикла соответственно помечает образ числом
+docker tag "${id}" "myimage:latest_step_${x}"
+Увеличивает счетчик шагов
+((x++))
+done
+
+Получить доступ к файлам на хосте из контейнера
+Каталог хоста /var/db/tables монтируется в /var/data1, и его можно открыть, чтобы запустить контейнер(-v - требуется том, внешний по отношению к контейнеру)
+docker run -v /var/db/tables:/var/data1 -it debian bash
+
+
+Запуск Docker без использования sudo(добавить себя в группу docker)
+sudo addgroup -a username docker + перезагрузить компьютер/docker
+
+Удалить контейнеры в своей системе:
+1. docker rm -f - удалит все переданные контейнеры, даже если они работают
+docker ps -a -q | xargs --no-run-if-empty docker rm -f
+2. удалить все те, что завершили работу
+docker ps -a -q --filter status=exited | xargs --no-run-if-empty docker rm
+3. дургие фильтры в Метод.42
+
+
+Создание графа зависимостей образов Docker(визуализировать дерево образов, хранящихся на хосте)
+Метод.46

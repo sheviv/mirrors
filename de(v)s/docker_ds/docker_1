@@ -1,0 +1,64 @@
+Установка jupyter/datascience-notebook(образ jupyter-notebook)
+docker run -p 8888:8888 jupyter/scipy-notebook:17aba6048f44
+
+"""
+Работа в папке docker
+"""
+Попасть внутрь(bash) контейнера
+docker exec -it id_container bash
+ 
+Переместить файл(wine.data) в контейнер.
+1. Сохранить в папку с docker
+2. Скопировать файл в контейнер(pwd - проверить расположение контейнера/запустить команду внутри контейнера - /home/name_user)
+docker cp wine.data id_container:/home/name_user_container/wine.data
+
+Сохранение ноутбуков из контейнера(сохранение изменеинй в данных при работе)
+1. Привязать директорию из контейнера к локальной директории
+docker run -v /dl_projects/mirrors/de(v)s/docker_ds:/home/name_user_container/ -p 8888:8888 jupyter/scipy-notebook:17aba6048f44
+2. Создать ноутбук(docker_test.ipynb)
+3. Внести нужные изменения и сохранить.
+
+Установка библиотек в контейнер(ноутбук)
+1. Добавить нужные библеотеки(данные для установки и т.д.) в готовый image 
+2. Создать Dockerfile в папке docker
+FROM jupyter/scipy-notebook:17aba6048f44
+RUN pip install name_library
+3. Создать(build) контейнер из текущей директории(.)
+docker build .
+3. Запустить Dockerfile из текущей директории(.) - будет создано id контейнера(new_id_container)
+docker run -v /dl_projects/mirrors/de(v)s/docker_ds:/home/name_user_container/ -p 8888:8888 new_id_container
+
+"""
+Запуск нескольких сервисов одновременно(docker-compose)
+"""
+Создать(build) контейнер из текущей директории(.) с тегом my_notebook
+docker build -t my_notebook .
+Запустить Dockerfile из текущей директории(.) - будет создано id контейнера(new_id_container)
+docker run -v /dl_projects/mirrors/de(v)s/docker_ds:/home/name_user_container/ -p 8888:8888 my_notebook
+1. Создать .yaml файл docker-compose.yaml
+version: '3'
+# Внутри создаются все нужные сервисы
+services:
+  jupyter:
+    # Откуда будет производится сборка
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /dl_projects/mirrors/de(v)s/docker_ds:/home/name_user_container/
+    ports:
+      - "8888:8888"
+2. Запустить docker-compose.yaml
+docker-compose run 
+
+Добавить POSTGRES image docker-compose.yaml
+1. Добавить сервис в 
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+2. Остальное:
+https://www.youtube.com/watch?v=VJSbY5HakYA&list=PLQJ7ptkRY-xbR0ka2TUxJkXna40XWu92m&index=10&ab_channel=GlebMikhaylov
