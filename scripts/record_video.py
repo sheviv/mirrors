@@ -43,4 +43,6 @@ def webcam_record(src=0, output_path=None):
     for frame in frames:
         writer.write(frame)
     writer.release()
+
+
 webcam_record()

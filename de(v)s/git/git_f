@@ -18,7 +18,7 @@
 8. Обновить ветку на ветку
 - clone master
 - cd master
- - git checkout
+- git checkout
 9. Сохранить изменения в "хранилище"
 - git stash #сохранить(ctrl-c)
 - git stash apply #вставить(ctrl-v)

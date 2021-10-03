@@ -60,9 +60,6 @@ with sq.connect("saper.db") as con:
 # GROUP BY user_id
 # ORDER BY sum DESC
 
-# ФОРМИРОВАНИЕ СВОДНОГО ОТЧЕТА С JOIN
-# https://www.youtube.com/watch?v=q87MZoKpKSs&list=PLA0M1Bcd0w8x4Inr5oYttMK6J47vxgv6J&index=6&ab_channel=selfedu
-
 # ОБЪЕДИНЕНИЕ НЕСКОЛЬКИХ ТАБЛИЦ UNION(где score=val, 'from'=type)
 # UNION - ТОЛЬКО УНИКАЛЬНЫЕ ЗНАЧЕНИЯ
 # SELECT score, `from` FROM tab1
