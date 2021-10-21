@@ -1,6 +1,8 @@
 class Point:
     x = 1
     y = 2
+
+
 pt = Point()
 pt.x = 10
 pt.y = 20
@@ -15,4 +17,4 @@ print(hasattr(pt, "y"))
 setattr(pt, "z", 7)  # добавить атрибут z=7
 delattr(pt, "z")  # удалить любой атрибут
 
-print(isinstance(pt, Point))  #  является ли pt экземпляром классса Point
+print(isinstance(pt, Point))  # является ли pt экземпляром классса Point

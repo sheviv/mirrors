@@ -83,6 +83,3 @@ model = sm.tsa.AR(values)
 results = model.fit(MAXLAGS)
 # оценках параметров(сначала свободный член, затем оценки двух первых лагов)
 print(results.params)
-
-
-# Введение в scikit-learn
