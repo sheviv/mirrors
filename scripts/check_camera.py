@@ -12,7 +12,7 @@ for camera_idx in range(10):
         all_camera_idx_available.append(camera_idx)
         cap.release()
 
-cap = cv2.VideoCapture(4)
+cap = cv2.VideoCapture(0)
 # cap = cv2.VideoCapture(0)
 while (cap.isOpened()):
     while True:
