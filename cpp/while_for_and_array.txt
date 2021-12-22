@@ -1,0 +1,46 @@
+//Цикл for
+int i;
+for (i = 1; i <= 100; i++)
+{
+    cout << i << " ";
+}
+
+//Цикл for по вектору
+for (auto now : v)
+{
+    cout << now << " ";
+} 
+
+//Векторы
+#include <vector>
+//n — кол-во элементов последовательности
+//ai — члены последовательности
+int n;
+cin >> n;
+vector <int> a(n);
+//считывание и запись в массив(лист)
+for (int i = 0; i < n; i++) {
+    cin >> a[i];
+}
+//обработка и вывод
+for (int i = n - 1; i >= 0; i--) {
+    cout << a[i] << " ";
+}
+
+//Метод push_back
+int n;
+cin >> n;
+vector <int> a;
+//считывание
+for (int i = 0; i < n; i++) {
+      int temp;
+      cin >> temp;
+      if (temp > 0) {
+            a.push_back(temp);
+      }
+}
+//обработка и вывод
+for (i = a.size() - 1; i >= 0; i--) {
+      cout << a[i] << " ";
+}
+

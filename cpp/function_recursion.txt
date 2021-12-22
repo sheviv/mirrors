@@ -1,0 +1,27 @@
+//Функция 
+int gcd(int a, int b)
+{
+    return a, b;
+}
+int main() {
+    int n, m;
+    cin >> n >> m;
+    cout << gcd(n, m);
+    return 0;
+}
+
+//Void - функция не будет возвращать ничего, только выполнять действия
+void reduce(int &a, int &b)
+{
+    int c = gcd(a, b);
+    a /= c;
+    b /= c;
+}
+int main()
+{
+    int n, m;
+    cin >> n >> m;
+    reduce(n, m);
+    cout << n << " " << m;
+    return 0;
+}

@@ -1,0 +1,53 @@
+//Чтение строк
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    string s;
+    cin >> s;
+    cout << "Hello, " + s;
+    return 0;
+}
+
+//считать строку (в line) целиком
+getline(cin, s)
+
+//Считать строку, сохранить первый(нулевой) символ строки в переменную типа char
+string s;
+char c;
+cin >> s;
+c = s[0];
+cout << c;
+
+//код символа
+cout << (int) c;
+
+//Выделение цифр строки
+string s;
+getline(cin, s);
+for (auto c : s) {
+    if (c >= '0' && c <= '9') {
+        cout << c;
+    }
+}
+
+//Поиск подстроки в строке(среди n строк)
+int n;
+cin >> n;
+string s;
+getline(cin, s);
+for (int i = 0; i < n; i++)
+{
+    getline(cin, s);
+    if (s.find("rkpt") != -1)
+    {
+        for (auto c : s)
+        {
+            if (c >= '0' && c <= '9')
+            {
+                cout << c;
+            }
+        }
+    }
+}

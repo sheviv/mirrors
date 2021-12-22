@@ -1,29 +1,33 @@
 #include <iostream>
+#include <stdio.h> 
+#include <cmath>
+#include <iomanip>
+#include <limits>
+#include <vector>
+#include <algorithm> 
 
 using namespace std;
 
 int main()
 {
-    int e, prev, curr_rep_len, max_rep_len, element;
-    prev = -1;
-    curr_rep_len = 0;
-    max_rep_len = 0;
-    cin >> e;
-    element = e;
-    while (element != 0)
-    {
-        if (prev == element)
-        {
-            curr_rep_len += 1;
+	int n, m, ii, jj;
+    vector <int> v;
+	cin >> n;
+    cin >> m;
+	int a[n][m];
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cin >> a[i][j];
         }
-        else
-        {
-            prev = element;
-            max_rep_len = max(max_rep_len, curr_rep_len);
-            curr_rep_len = 1;
-        }
-        cin >> element;
     }
-    max_rep_len = max(max_rep_len, curr_rep_len);
-    cout << max_rep_len << endl;
+    cin >> ii;
+    cin >> jj;
+
+    for (int j = 0; j < a[i].size(); j++)
+    {
+        if (trans_vec[j].size() != b.size())
+            trans_vec[j].resize(b.size());
+        trans_vec[j][i] = b[i][j];
+    }
+	return 0;
 }

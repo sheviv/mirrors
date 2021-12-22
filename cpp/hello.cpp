@@ -1,32 +1,29 @@
-#include <algorithm>
-#include <initializer_list>
 #include <iostream>
+#include <stdio.h> 
+#include <cmath>
+#include <iomanip>
+#include <limits>
+#include <vector>
+
+using namespace std;
+
+int fib(int n)
+{   
+    int cur = 1;
+    if (n > 2)
+    {
+        return cur = fib(n - 1) + fib(n - 2);
+    }
+    return cur;
+}
 
 int main()
-{   int m, mm, mmm;
-    int a = 1;
-    int b = 2;
-    int c = 3;
+{
+    // double n;
+    int n;
+    cin >> n;
+    // cin >> b;
 
-    if (a >= b && a >= c)
-    {
-        m = a;
-        if (b >= c)
-        {
-            mm = b;
-            mmm = c;
-        }
-        else
-        {
-            mm = c;
-            mmm = b;
-        }
-    }
-  
-    elif (b >= a) and (b >= c):
-        largest = b
-    else:
-        largest = c
-
-    std::cout << m << "\n";
+    cout << fib(n) << endl;
+    return 0;
 }
