@@ -1,0 +1,47 @@
+//Сортировка
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int main() {
+    int n;
+    cin >> n;
+    vector <int> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];}
+    sort(a.begin(), a.end());
+    for (auto now : a) {
+        cout << now << " ";}
+    return 0;}
+
+//Структуры
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+using namespace std;
+struct man {
+    int height;
+    string name;};
+bool cmp(man a, man b) {
+    return a.height < b.height;}
+int main() {
+    int n;
+    cin >> n;
+    vector <man> a(n);
+    for (int i = 0; i < n; i++) {
+        int temp;
+        string s_temp;
+        cin >> temp >> s_temp;
+        man struct_temp; // временная структура
+        struct_temp.height = temp;
+        struct_temp.name = s_temp;
+        a[i] = struct_temp; // создание пары значение - номер}
+    sort(a.begin(), a.end(), cmp);
+    for (auto now : a) {
+        cout << now.name << endl;}
+    return 0;}
+
+//Устойчивая сортировка
+//сохраняет взаимный порядок одинаковых элементов
+stable_sort(a.begin(), a.end(), cmp)

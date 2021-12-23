@@ -1,0 +1,87 @@
+//Работа с элементами множества
+#include <iostream>
+#include <set>
+using namespace std;
+int main() {
+    set <int> s;
+    // добавление
+    s.insert(x);
+    // проверка
+    s.find(x) == s.end()
+    // удаление
+    s.erase(x);
+    return 0;
+}
+
+//Вывод всех элементов множества
+//Подсчет N чисел и «положим» их во множество S:
+set <int> s;
+int n;
+cin >> n;
+for (int i = 0; i < n; i++) {
+    int x;
+    cin >> x;
+    s.insert(x);
+}
+//1.1.Вывести всё содержимое множества
+(begin - возвращает указатель на самый маленький элемент,
+end - конец множества(после самого большого элемента),
+++ - переход к указателю на следующий элемент. Чтобы посмотреть, что за элемент хранится по указателю, нужно перед его именем написать символ *.)
+for (auto now = s.begin(); now != s.end(); now++) {
+    cout << *now << ' ';
+}
+//1.2.Вывести всё содержимое множества
+for (auto now : s) {    
+    cout << now << ' ';
+}
+
+//Подсчет количества вхождений элемента в последовательность
+//Lower_bound - возвращает указатель на первый элемент(значение больше либо равно переданному параметру)
+//Upper_bound - на первый элемент(который строго больше)
+multiset <int> s;
+int n;
+cin >> n;
+for (int i = 0; i < n; i++) {
+    int x;
+    cin >> x;
+    s.insert(x);}
+int cnt = 0;
+for (auto now = s.lower_bound(1); now != s.upper_bound(1); now++) {
+    cnt++;}
+cout << cnt;
+
+//Словари
+#include <iostream>
+#include <map>
+#include <string>
+using namespace std;
+int main() {
+      map <int, string> s;
+      s[112] = "sos";
+      if (s.find(112) != s.end()) {
+            cout << "YES\n";
+      }
+      return 0;
+}
+
+//Проход по элементам словаря
+//now.first - ключ.
+//now.second - значение.
+map <int, string> s;
+s[112] = "sos";
+s[102] = "emergency";
+for (auto now : s) {
+    cout << now.first << " " << now.second << "\n";}
+
+//Сопоставление нескольких значений
+#include <iostream>
+#include <map>
+#include <string>
+#include <vector>
+using namespace std;
+int main() {
+    map <string, vector <string>> s;
+    s["Vasya"] = { "112133", "12341" };
+    for (auto now : s["Vasya"]) {
+        cout << now << " ";}
+    return 0;}
