@@ -1,0 +1,280 @@
+Структуры — это способ синтаксически (и физически)
+сгруппировать логически связанные данные.
+struct Point {
+double x ;
+double y ;};
+struct Segment {
+Point p1 ;
+Point p2 ;
+};
+double length ( Segment s );
+bool intersects ( Segment s1 ,
+Segment s2 , Point * p );
+
+Работа со структурами
+Доступ к полям структуры осуществляется через оператор ’.’:
+# include < cmath >
+double length ( Segment s ) {
+double dx = s . p1 . x - s . p2 . x ;
+double dy = s . p1 . y - s . p2 . y ;
+return sqrt ( dx * dx + dy * dy );}
+Для указателей на структуры используется оператор ’->’.
+double length ( Segment * s ) {
+double dx = s - > p1 . x - s - > p2 . x ;
+double dy = s - > p1 . y - s - > p2 . y ;
+return sqrt ( dx * dx + dy * dy );}
+
+Инициализация структур
+Поля структур можно инициализировать подобно массивам:
+Point p1 = { 0.4 , 1.4 };
+Point p2 = { 1.2 , 6.3 };
+Segment s = { p1 , p2 };
+Структуры могут хранить переменные разных типов.
+struct IntArray2D {
+size_t a;
+size_t b;
+int ** data;}
+
+
+Метод — это функция, определённая внутри структуры.
+struct Segment {
+Point p1 ;
+Point p2 ;
+double length () {
+double dx = p1 . x - p2 . x ;
+double dy = p1 . y - p2 . y ;
+return sqrt ( dx * dx + dy * dy );}};
+int main () {
+Segment s = { { 0.4 , 1.4 } , { 1.2 , 6.3 } };
+cout << s . length () << endl ;
+return 0;}
+
+
+Методы реализованы как функции с неявным параметром
+this, который указывает на текущий экземпляр структуры.
+struct Point{
+double x ;
+double y ;
+void shift (/* Point * this , */
+double x , double y ) {
+this - > x += x ;
+this - > y += y ;}};
+
+Методы можно разделять на объявление и определение:
+struct Point{
+double x ;
+double y ;
+void shift ( double x , double y );};
+void Point :: shift ( double x , double y)
+{this - > x += x;
+this - > y += y;}
+
+
+Абстракция и инкапсуляция
+Использование методов позволяет объединить данные и
+функции для работы с ними.
+struct IntArray2D {
+int & get ( size_t i , size_t j ) {
+return data [ i * b + j ];}
+size_t a;
+size_t b;
+int * data;};
+IntArray2D m = foo ();
+for ( size_t i = 0; i != m . a ; ++ i )
+for ( size_t j = 0; j != m . b ; ++ j)
+if ( m . get (i , j ) < 0) m . get (i , j ) = 0;
+
+
+Конструкторы — это методы для инициализации структур.
+struct Point {
+Point () {
+x = y = 0;}
+Point ( double x , double y ) {
+this - > x = x ;
+this - > y = y ;}
+double x ;
+double y ;};
+Point p1 ;
+Point p2 (3 ,7);
+
+Список инициализации позволяет проинициализировать поля
+до входа в конструктор.
+struct Point {
+Point () : x (0) , y (0)
+{}
+Point ( double x , double y ) : x ( x ) , y ( y )
+{}
+double x ;
+double y ;};
+
+
+Значения по умолчанию
+∙ Функции могут иметь значения параметров по умолчанию.
+∙ Значения параметров по умолчанию нужно указывать в
+объявлении функции.
+struct Point {
+Point ( double x = 0 , double y = 0)
+: x ( x ) , y ( y ) {}
+double x ;
+double y ;};
+
+
+Конструкторы от одного параметра
+Для того, чтобы запретить неявное пользовательское
+преобразование, используется ключевое слово explicit.
+struct Segment {
+Segment () {}
+explicit Segment ( double length )
+: p2 ( length , 0)
+{}
+Point p1 ;
+Point p2 ;};
+Segment s1 ;
+Segment s2 (10);
+Segment s3 = 20; // error
+
+Неявное пользовательское преобразование, задаётся также
+конструкторами, которые могут принимать один параметр.
+struct Point {
+explicit Point ( double x = 0 , double y = 0)
+: x ( x ) , y ( y )
+{}
+double x ;
+double y ;};
+Point p1 ;
+Point p2 (2);
+Point p3 (3 ,4);
+Point p4 = 5; // error
+
+
+Деструктор — это метод, который вызывается при удалении
+структуры, генерируется компилятором.
+struct IntArray {
+explicit IntArray ( size_t size )
+: size ( size )
+, data (new int [ size ])
+{ }
+~ IntArray () {
+delete [] data ;
+}
+size_t size ;
+int * data ;
+};
+
+
+Время жизни — это временной интервал между вызовами
+конструктора и деструктора.
+void foo ()
+{IntArray a1 (10); // создание a1
+IntArray a2 (20); // создание a2
+for ( size_t i = 0; i != a1 . size ; ++ i ) {
+IntArray a3 (30); // создание a3
+} // удаление a3
+} // удаление a2, потом a1
+
+
+Объекты и классы
+∙ Структуру с методами, конструкторами и деструктором
+называют классом.
+∙ Экземпляр (значение) класса называется объектом.
+struct IntArray {
+explicit IntArray ( size_t size );
+~ IntArray ();
+int & get ( size_t i );
+size_t size ;
+int * data ;};
+IntArray a (10);
+IntArray b = {20 , new int [20]}; // ошибка
+
+
+Объекты в динамической памяти
+Создание
+Для создания объекта в динамической памяти используется
+оператор new, он отвечает за вызов конструктора.
+struct IntArray {
+explicit IntArray ( size_t size );
+~ IntArray ();
+size_t size ;
+int * data ;
+};
+// выделение памяти и создание объекта
+IntArray * pa = new IntArray (10);
+// только выделение памяти
+IntArray * pb =
+( IntArray *) malloc ( sizeof ( IntArray ));
+
+Удаление
+При вызове оператора delete вызывается деструктор объекта.
+// выделение памяти и создание объекта
+IntArray * pa = new IntArray (10);
+// вызов деструктора и освобождение памяти
+delete pa ;
+Операторы new [] и delete [] работают аналогично
+// выделение памяти и создание 10 объектов
+// (вызывается конструктор по умолчанию)
+IntArray * pa = new IntArray [10];
+// вызов деструкторов и освобождение памяти
+delete [] pa ;
+
+Placement new
+// выделение памяти
+void * p = myalloc ( sizeof ( IntArray ));
+// создание объекта по адресу p
+IntArray * a = new ( p ) IntArray (10);
+// явный вызов деструктора
+a - >~ IntArray ();
+// освобождение памяти
+myfree ( p );
+Проблемы с выравниванием:
+char b [ sizeof ( IntArray )];
+new ( b ) IntArray (20); // потенциальная проблема
+
+
+Ключевое слово class
+Ключевое слово struct можно заменить на class, тогда поля
+и методы по умолчанию будут private.
+class IntArray {
+public :
+explicit IntArray ( size_t size )
+: size_ ( size ) , data_ (new int[ size ])
+{}
+~ IntArray () { delete [] data_ ; }
+int & get ( size_t i) { return data_ [ i ]; }
+size_t size () { return size_ ; }
+private :
+size_t size_ ;
+int * data_ ;};
+
+
+Инварианты класса
+∙ Выделение публичного интерфейса позволяет
+поддерживать инварианты класса
+(сохранять данные объекта в согласованном состоянии).
+struct IntArray {
+...
+size_t size_ ;
+int * data_ ; // массив размера size_
+};
+∙ Для сохранения инвариантов класса:
+1. все поля должны быть закрытыми,
+2. публичные методы должны сохранять инварианты класса.
+∙ Закрытие полей класса позволяет абстрагироваться от
+способа хранения данных объекта.
+
+
+Публичный интерфейс
+struct IntArray {
+...
+void resize ( size_t nsize ) {
+int * ndata = new int [ nsize ];
+size_t n = nsize > size_ ? size_ : nsize ;
+for ( size_t i = 0; i != n ; ++ i )
+ndata [ i ] = data_ [ i ];
+delete [] data_ ;
+data_ = ndata ;
+size_ = nsize ;}
+private :
+size_t size_ ;
+int * data_ ;};
+
+
