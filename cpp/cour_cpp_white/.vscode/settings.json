@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "ostream": "cpp",
+        "algorithm": "cpp",
+        "iostream": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "array": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "ranges": "cpp",
+        "utility": "cpp",
+        "random": "cpp"
+    }
+}
