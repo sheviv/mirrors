@@ -11,6 +11,12 @@
         "initializer_list": "cpp",
         "ranges": "cpp",
         "utility": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "iosfwd": "cpp",
+        "iomanip": "cpp",
+        "sstream": "cpp",
+        "regex": "cpp",
+        "*.tcc": "cpp",
+        "stdexcept": "cpp"
     }
 }

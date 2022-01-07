@@ -1,0 +1,46 @@
+1/ 
+bool e = persons.HasPerson("");
+persons.AddPerson("Eugene");
+
+2/
+class Task {
+public:
+  void MakeRandom() { /* ... */ }
+  string GetText() { /* ... */ }
+private:
+  string text;
+};
+
+class Task {
+public:
+  void MakeRandom() { /* ... */ }
+  string GetText() { /* ... */ }
+  string text;
+};
+
+class Task {
+public:
+  void MakeRandom() { /* ... */ }
+  int GetText() { /* ... */ }
+private:
+  string text;
+};
+
+struct Task {
+  void MakeRandom() { /* ... */ }
+  string GetText() { /* ... */ }
+  string text;
+};
+
+3/
+private:
+  void LogPage(int day, int page) { /* ... */ }
+public:
+  int pages_read;
+
+public:
+  void LogPage(int day, int page) { /* ... */ }
+private:
+  int pages_read;
+
+++
