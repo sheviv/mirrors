@@ -1,0 +1,6 @@
+1. Switch to Intel graphics card
+sudo prime-select intel
+2. Switch to Nvidia graphics card
+sudo prime-select nvidia
+or
+Ubuntu - Settings - Software & Updates - Additional Drivers
