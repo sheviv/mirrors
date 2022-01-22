@@ -43,3 +43,63 @@ int main()
 
 //////////
 
+// Оператор доступа к членам через указатель
+struct Man
+{
+    int weight;
+    double height;
+};
+Man man; // определяем переменную структуры Man
+// Доступ к члену осуществляется через ссылку на переменную структуры Man
+Man &ref = man;
+ref.weight = 60;
+
+
+///////
+
+struct Man
+{
+    int weight;
+    double height;
+};
+Man man;
+// Доступ к члену осуществляется через указатель на переменную структуры Man
+Man *ptr = &man;
+(*ptr).weight = 60;
+// or
+ptr->weight = 60;
+
+
+////////
+
+int array[7] = { 10, 8, 6, 5, 4, 3, 1 };
+for (auto &element: array) // символ амперсанда делает element ссылкой на текущий элемент массива, предотвращая копирование
+    std::cout << element << ' ';
+
+
+///////
+
+// обычные ссылки или константные ссылки в качестве объявляемого элемента в цикле foreach (в целях улучшения производительности).
+int array[7] = { 10, 8, 6, 5, 4, 3, 1 };
+for (const auto &element: array) // element - это константная ссылка на текущий элемент массива в итерации
+    std::cout << element << ' ';
+
+///////
+
+// «общий указатель»
+int nResult;
+float fResult;
+struct Something
+{
+    int n;
+    float f;
+};
+Something sResult;
+void *ptr; // общий указатель void
+ptr = &nResult; // допустимо
+ptr = &fResult; // допустимо
+ptr = &sResult; // допустимо
+
+
+////////
+
