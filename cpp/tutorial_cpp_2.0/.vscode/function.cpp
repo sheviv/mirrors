@@ -67,3 +67,52 @@ int main()
 
 ////////
 // Возврат значений по ссылке, по адресу и по значению
+// Возврат по значению
+int doubleValue(int a)
+{
+    int value = a * 3;
+    return value; // копия value возвращается здесь
+} // value выходит из области видимости здесь
+
+
+// Возврат по адресу
+int* doubleValue(int a)
+{
+    int value = a * 3;
+    return &value; // value возвращается по адресу здесь
+} // value уничтожается здесь
+
+
+// Возврат по ссылке
+int& doubleValue(int a)
+{
+    int value = a * 3;
+    return value; // value возвращается по ссылке здесь
+} // value уничтожается здесь
+
+
+//////////
+// Перегрузка функций(несколько функций с одним и тем же именем, но с разными параметрами)
+int subtract(int a, int b); // целочисленная версия
+double subtract(double a, double b); // версия типа с плавающей запятой
+
+
+// Параметры по умолчанию
+// Правила написания
+void printValue(int a=5, int b); // не правильно
+void printValue(int a, int b=5); // правильно
+//
+void printValues(int a, int b=5)
+{
+    std::cout << "a: " << a << '\n';
+    std::cout << "b: " << b << '\n';
+}
+printValues(1); // в качестве b будет использоваться значение по умолчанию - 5
+printValues(6, 7); // в качестве b будет использоваться значение, предоставляемое пользователем - 7
+
+// Несколько параметров по умолчанию
+void printValues(int a=10, int b=11, int c=12)
+{
+    std::cout << "Values: " << a << " " << b << " " << c << '\n';
+}
+
