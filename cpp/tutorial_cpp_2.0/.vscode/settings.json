@@ -30,6 +30,8 @@
   "files.associations": {
     "iostream": "cpp",
     "ostream": "cpp",
-    "string_view": "cpp"
+    "string_view": "cpp",
+    "cassert": "cpp",
+    "array": "cpp"
   }
 }
