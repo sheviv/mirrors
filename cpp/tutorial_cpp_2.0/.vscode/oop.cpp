@@ -63,33 +63,52 @@
 // or
 // #include <iostream>
 #include <string>
-class Employee
-{
-    public:
-        std::string m_name;
-        int m_id;
-        double m_wage;
-    // Метод вывода информации о работнике на экран
-    void print()
-    {
-        std::cout << "Name: " << m_name <<
-        "\nId: " << m_id <<
-        "\nWage: $" << m_wage << '\n';
-    }
-};
-int main()
-{
-    // Определяем двух работников
-    Employee john { "John", 5, 30.00 };
-    Employee max { "Max", 6, 32.75 };
-    // Выводим информацию о работниках на экран
-    john.print();
-    std::cout<<std::endl;
-    max.print();
-    return 0;
-}
+// class Employee
+// {
+//     public:
+//         std::string m_name;
+//         int m_id;
+//         double m_wage;
+//     // Метод вывода информации о работнике на экран
+//     void print()
+//     {
+//         std::cout << "Name: " << m_name <<
+//         "\nId: " << m_id <<
+//         "\nWage: $" << m_wage << '\n';
+//     }
+// };
+// int main()
+// {
+//     // Определяем двух работников
+//     Employee john { "John", 5, 30.00 };
+//     Employee max { "Max", 6, 32.75 };
+//     // Выводим информацию о работниках на экран
+//     john.print();
+//     std::cout<<std::endl;
+//     max.print();
+//     return 0;
+// }
 
 
 
 //////////
 // public и private
+// 3 уровня доступа:
+// public - делает члены открытыми;
+// private - делает члены закрытыми;
+// protected - открывает доступ к членам только для дружественных и дочерних классов
+
+class Values
+{
+    public:
+        int m_number1;
+        int m_number2;
+        int m_number3;
+};
+int main()
+{
+    Values value;
+    value.m_number1 = 7;
+    std::cout << value.m_number1 << '\n';
+    return 0;
+}
