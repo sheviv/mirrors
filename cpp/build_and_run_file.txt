@@ -1,0 +1,2 @@
+1. g++ -o <myprogram_name> source.cpp
+2. ./myprogram_name
