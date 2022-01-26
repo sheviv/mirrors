@@ -478,21 +478,138 @@
 
 // or
 
-class Mathem
+// class Mathem
+// {
+//     private:
+//         int m_value;
+//     public:
+//         Mathem() { m_value = 0; }
+//         Mathem& add(int value) { m_value += value; return *this; }
+//         Mathem& sub(int value) { m_value -= value; return *this; }
+//         Mathem& multiply(int value) { m_value *= value; return *this; }
+//         int getValue() { return m_value; }
+// };
+// int main()
+// {
+//     Mathem operation;
+//     operation.add(7).sub(5).multiply(3);
+//     std::cout << operation.getValue() << '\n';
+//     return 0;
+// }
+
+
+
+///////
+// Классы и заголовочные файлы
+// Объявление методов класса вне класса
+// class Mathem
+// {
+//     private:
+//         int m_value = 0;
+//     public:
+//         Mathem(int value=0);
+//         Mathem& add(int value);
+//         Mathem& sub(int value);
+//         Mathem& divide(int value);
+//         int getValue() { return m_value; }
+// };
+// Mathem::Mathem(int value): m_value(value)
+// {
+// }
+// Mathem& Mathem::add(int value)
+// {
+//     m_value += value;
+//     return *this;
+// }
+// Mathem& Mathem::sub(int value)
+// {
+//     m_value -= value;
+//     return *this;
+// }
+// Mathem& Mathem::divide(int value)
+// {
+//     m_value /= value;
+//     return *this;
+// }
+
+
+// Разбить класс на файлы, для исползования вне тела функции
+// Date.h:
+// #ifndef DATE_H
+// #define DATE_H
+// class Date
+// {
+//     private:
+//         int m_day;
+//         int m_month;
+//         int m_year;
+//     public:
+//         Date(int day, int month, int year);
+//         void SetDate(int day, int month, int year);
+//         int getDay() { return m_day; }
+//         int getMonth() { return m_month; }
+//         int getYear() { return m_year; }
+// };
+// #endif
+// // Date.cpp:
+// #include "Date.h"
+// // Конструктор класса Date
+// Date::Date(int day, int month, int year)
+// {
+//     SetDate(day, month, year);
+// }
+// // Метод класса Date
+// void Date::SetDate(int day, int month, int year)
+// {
+//     m_day = day;
+//     m_month = month;
+//     m_year = year;
+// }
+
+
+/////////
+// Классы и const
+// Константные объекты классов
+// class Anything
+// {
+//     public:
+//         int m_value;
+//         Anything(): m_value(0) { }
+//         void setValue(int value) { m_value = value; }
+//         int getValue() { return m_value ; }
+// };
+// int main()
+// {
+//     const Anything anything; // вызываем конструктор по умолчанию
+//     anything.m_value = 7; // ошибка компиляции: нарушение const
+//     anything.setValue(7); // ошибка компиляции: нарушение const
+//     return 0;
+// }
+
+///
+// int main()
+// {
+//     Anything anything;
+//     anything.getValue() = "Hello!"; // вызывается неконстантный getValue()
+//     const Anything anything2;
+//     anything2.getValue(); // вызывается константный getValue()
+//     return 0;
+// }
+
+
+
+
+//////////
+// Статические переменные-члены класса
+int generateID()
 {
-    private:
-        int m_value;
-    public:
-        Mathem() { m_value = 0; }
-        Mathem& add(int value) { m_value += value; return *this; }
-        Mathem& sub(int value) { m_value -= value; return *this; }
-        Mathem& multiply(int value) { m_value *= value; return *this; }
-        int getValue() { return m_value; }
-};
+    static int s_id = 0;
+    return ++s_id;
+}
 int main()
 {
-    Mathem operation;
-    operation.add(7).sub(5).multiply(3);
-    std::cout << operation.getValue() << '\n';
+    std::cout << generateID() << '\n';  // 1
+    std::cout << generateID() << '\n';  // 2
+    std::cout << generateID() << '\n';  // 3
     return 0;
 }
