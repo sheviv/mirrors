@@ -643,7 +643,7 @@
 // }
 
 ///
-class Humidity;
+class Humidity;  // Без этой строчки компилятор выдал бы ошибку, что не знает, что такое Humidity при анализе прототипа дружественной функции outWeather()
 class Temperature
 {
     private:
@@ -662,8 +662,7 @@ class Humidity
 };
 void outWeather(const Temperature &temperature, const Humidity &humidity)
 {
-    std::cout << "The temperature is " << temperature.m_temp <<
-    " and the humidity is " << humidity.m_humidity << '\n';
+    std::cout << "The temperature is " << temperature.m_temp << " and the humidity is " << humidity.m_humidity << '\n';
 }
 int main()
 {
