@@ -4,7 +4,6 @@ from autobahn.websocket import WebSocketClientFactory, WebSocketClientProtocol, 
 import cppMethods 
   
 class EchoClientProtocol(WebSocketClientProtocol):
-  
    def sendHello(self):
       self.sendMessage("Hello, world!")  
   
