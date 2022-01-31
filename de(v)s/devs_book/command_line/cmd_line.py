@@ -24,7 +24,7 @@ import sys
 # if __name__ == '__main__':
 #     print(f"first: {sys.argv[0]}")
 #     print(f"second: {sys.argv[1]}")
-# ./asd.py qwe zxc  // first: ./asd.py \n second: qwe
+# ./cmd_line.py qwe zxc  // first: ./cmd_line.py \n second: qwe
 
 
 # argparse
@@ -38,7 +38,7 @@ import sys
 #     if args.twice:
 #         print(f"{args.message}")
 # 2.
-# python3 asd.py --twice my_message  // my_message
+# python3 cmd_line.py --twice my_message  // my_message
 
 
 # simple decorators
@@ -86,7 +86,7 @@ Fire
 # if __name__ == '__main__':
 #     fire.Fire()
 # 2.
-#  python3 asd.py hello World
+#  python3 cmd_line.py hello World
 
 
 """
