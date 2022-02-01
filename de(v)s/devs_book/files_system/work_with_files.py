@@ -80,6 +80,13 @@ import csv
 
 
 """
+Change CSV to JSON
+"""
+contents = open('name.csv').readlines()
+json.dumps(list(csv.reader(contents)))
+
+
+"""
 Pandas
 """
 import pandas as pd
