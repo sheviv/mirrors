@@ -1,0 +1,8 @@
+// Plugins
+
+1. Change version plugins in http://127.0.0.1:8080/pluginManager/installed
+1.1. Go to plugins Jenkins in browser
+1.2. Download my version plugins(.hpi)
+1.3. Go to http://127.0.0.1:8080/pluginManager/advanced and Upload + restart Jenkins.
+
+

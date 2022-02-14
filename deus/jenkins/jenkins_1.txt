@@ -1,0 +1,19 @@
+1. Install Java on machine:
+sudo apt install openjdk-8-jre
+
+2. Install Jenkins from Documentations
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins
+
+3. Check port and work Jenkins
+3.1. Go to web-browser
+http://127.0.0.1:8080/
+3.2. Copy password
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+4. Create version with/without plugins
